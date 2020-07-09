@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommentairesTable extends Migration
+class CreateMessagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateCommentairesTable extends Migration
      */
     public function up()
     {
-        Schema::create('commentaires', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('date_commentaire');
+            $table->date('date_message');
+            $table->string('texte');
+            $table->string('image');
 
+            /*
             //reference au contenu
             $table->unsignedBigInteger('contenu_message_id');
             $table->foreign('contenu_message_id')
@@ -24,18 +27,19 @@ class CreateCommentairesTable extends Migration
                 ->on('contenu_messages')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            */
 
             //reference a l'auteur
-            $table->unsignedBigInteger('utilisateur_id');
-            $table->foreign('utilisateur_id')
+            $table->unsignedBigInteger('auteur');
+            $table->foreign('auteur')
                 ->references('id')
                 ->on('utilisateurs')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
             //reference a la publication
-            $table->unsignedBigInteger('publication_id');
-            $table->foreign('publication_id')
+            $table->unsignedBigInteger('publication');
+            $table->foreign('publication')
                 ->references('id')
                 ->on('publications')
                 ->onDelete('cascade')
@@ -51,6 +55,6 @@ class CreateCommentairesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('commentaires');
+        Schema::dropIfExists('messages');
     }
 }

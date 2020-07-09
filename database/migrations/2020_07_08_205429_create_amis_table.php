@@ -14,17 +14,17 @@ class CreateAmisTable extends Migration
     public function up()
     {
         Schema::create('amis', function (Blueprint $table) {
-            //$table->bigIncrements('id');
-            $table->unsignedBigInteger('utilisateur1_id')->unique();
-            $table->unsignedBigInteger('utilisateur2_id')->unique();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('ami1')->unique();
+            $table->unsignedBigInteger('ami2')->unique();
 
-            $table->foreign('utilisateur1_id')
+            $table->foreign('ami1')
                 ->references('id')
                 ->on('utilisateurs')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('utilisateur2_id')
+            $table->foreign('ami2')
                 ->references('id')
                 ->on('utilisateurs')
                 ->onDelete('cascade')

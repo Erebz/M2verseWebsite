@@ -14,7 +14,7 @@ class CreateAppartenancesTable extends Migration
     public function up()
     {
         Schema::create('appartenances', function (Blueprint $table) {
-            //$table->bigIncrements('id');
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('utilisateur_id')->unique();
             $table->unsignedBigInteger('communaute_id')->unique();
 

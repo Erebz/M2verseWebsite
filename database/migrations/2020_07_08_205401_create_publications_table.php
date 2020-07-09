@@ -18,26 +18,20 @@ class CreatePublicationsTable extends Migration
             $table->string('titre');
             $table->date('date_publication');
             $table->boolean('spoiler');
-
-            //reference au contenu
-            $table->unsignedBigInteger('contenu_message_id');
-            $table->foreign('contenu_message_id')
-                ->references('id')
-                ->on('contenu_messages')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+            $table->string('texte');
+            $table->string('image');
 
             //reference a l'auteur
-            $table->unsignedBigInteger('utilisateur_id');
-            $table->foreign('utilisateur_id')
+            $table->unsignedBigInteger('auteur');
+            $table->foreign('auteur')
                 ->references('id')
                 ->on('utilisateurs')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
             //reference a la communaute
-            $table->unsignedBigInteger('communaute_id');
-            $table->foreign('communaute_id')
+            $table->unsignedBigInteger('communaute');
+            $table->foreign('communaute')
                 ->references('id')
                 ->on('communautes')
                 ->onDelete('cascade')
