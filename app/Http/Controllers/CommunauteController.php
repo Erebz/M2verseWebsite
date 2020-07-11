@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Modeles\Communaute;
-use App\Modeles\Message;
-use App\Modeles\Publication;
-use App\Modeles\Utilisateur;
 use Illuminate\Http\Request;
 
-class UtilisateurController extends Controller
+class CommunauteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +14,8 @@ class UtilisateurController extends Controller
      */
     public function index()
     {
-        $utilisateurs = Utilisateur::all();
-        $publications = Publication::all();
         $communautes = Communaute::all();
-        $messages = Message::all();
-        return view('listeUtilisateurs', compact('utilisateurs', 'publications', 'communautes','messages'));
+        return view('listeCommunautes', compact('communautes'));
     }
 
     /**
@@ -51,9 +45,14 @@ class UtilisateurController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Communaute $communaute)
     {
-        //
+        $nom = $communaute->nom;
+        $description = $communaute->description;
+        $publications = $communaute->publications;
+        $membres = $communaute->membres;
+
+        return view('afficherCommunaute', compact('communaute', 'nom', 'description', 'publications', 'membres'));
     }
 
     /**

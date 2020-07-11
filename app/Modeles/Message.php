@@ -9,11 +9,11 @@ class Message extends Model
     public $timestamps = false;
     protected $fillable = ['date_message', 'texte', 'image'];
 
-    public function utilisateur(){
+    public function auteurMessage(){
         return $this->belongsTo(Utilisateur::class, 'auteur');
     }
 
-    public function publication(){
+    public function publicationOrigine(){
         return $this->belongsTo(Publication::class, 'publication');
     }
 

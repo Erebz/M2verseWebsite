@@ -13,7 +13,7 @@ class Communaute extends Model
         return $this->hasMany(Publication::class, 'communaute');
     }
 
-    public function utilisateurs(){
+    public function membres(){
         return $this->belongsToMany(Utilisateur::class, 'appartenances');
     }
 }

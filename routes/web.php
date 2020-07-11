@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::resource('utilisateurs', 'UtilisateurController');
+Route::resource('communautes', 'CommunauteController');

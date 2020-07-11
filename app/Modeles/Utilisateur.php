@@ -24,4 +24,8 @@ class Utilisateur extends Model
     public function amis(){
         return $this->belongsToMany(Utilisateur::class, 'amis', 'ami1', 'ami2');
     }
+
+    public function likedPublications(){
+        return $this->belongsToMany(Publication::class, 'likes');
+    }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAmisTable extends Migration
+class CreateLikesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,23 @@ class CreateAmisTable extends Migration
      */
     public function up()
     {
-        Schema::create('amis', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('ami1');
-            $table->unsignedBigInteger('ami2');
+            $table->unsignedBigInteger('utilisateur_id');
+            $table->unsignedBigInteger('publication_id');
 
-            $table->foreign('ami1')
+            $table->foreign('utilisateur_id')
                 ->references('id')
                 ->on('utilisateurs')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('ami2')
+            $table->foreign('publication_id')
                 ->references('id')
-                ->on('utilisateurs')
+                ->on('publications')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
             $table->timestamps();
         });
     }
@@ -40,6 +41,6 @@ class CreateAmisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('amis');
+        Schema::dropIfExists('likes');
     }
 }
