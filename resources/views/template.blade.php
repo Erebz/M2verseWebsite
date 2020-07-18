@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     {!! Html::style('lib/bootstrap/bootstrap.css') !!}
+    {!! Html::style('styles/style_welcome.css') !!}
 
     <title>@yield('titrePage')</title>
 </head>
@@ -11,14 +12,14 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
 
-        <a class="navbar-brand" href="{{url('/communautes')}}">M2verse</a>
+        <a class="navbar-brand" href="{{url('/')}}">M2verse</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{url('/communautes')}}">Home
+                    <a class="nav-link" href="{{url('/')}}">Home
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
@@ -49,6 +50,6 @@
 </footer>
 {!! Html::script('lib/jquery/jquery-3.5.1.js') !!}
 {!! Html::script('lib/js/bootstrap.bundle.js') !!}
-{!! Html::script('lib/js/bootstrap.js/bootstrap.js') !!}
+{!! Html::script('lib/js/bootstrap.js') !!}
 </body>
 </html>
