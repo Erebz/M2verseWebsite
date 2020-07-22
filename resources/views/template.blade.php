@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     {!! Html::style('lib/bootstrap/bootstrap.css') !!}
     {!! Html::style('styles/style_welcome.css') !!}
+    {{ Html::favicon( 'img/favicon.png' ) }}
 
     <title>@yield('titrePage')</title>
 </head>

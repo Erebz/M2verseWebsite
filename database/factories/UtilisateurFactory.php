@@ -10,7 +10,7 @@ $factory->define(Utilisateur::class, function (Faker $faker) {
         'nom' => $faker->name,
         'pseudo' => $faker->name,
         'password' => $faker->sentence(3, true),
-        'mail' => $faker->email,
+        'mail' => $faker->unique()->email,
         'anniversaire' => $faker->date("Y-m-d")
     ];
 });

@@ -17,7 +17,7 @@ class CreateUtilisateursTable extends Migration
             $table->bigIncrements('id');
             $table->string('nom');
             $table->string('pseudo');
-            $table->string('mail');
+            $table->string('mail')->unique();
             $table->string('password');
             $table->date('anniversaire');
             $table->timestamps();
