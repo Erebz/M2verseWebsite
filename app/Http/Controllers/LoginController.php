@@ -17,24 +17,25 @@ class LoginController extends Controller
 
     public function authenticate(LoginRequest $requestFields)
     {
-        //$attributes = $requestFields->only(['mail', 'password']);
 
+    /*
         $user = Utilisateur::where('mail', $requestFields->mail)->get();
         if($user != null){
-            auth()->guard('web')->login($user);
+            Auth::guard('web')->login($user);
             return redirect()->route('acceuil');
         }else{
             return redirect()->route('login')->with('info', 'Failed to connect.');
         }
+*/
+        $attributes = $requestFields->only(['mail', 'password']);
 
-
-        /*
         if (Auth::attempt($attributes)) {
-            return redirect()->route('acceuil');
+            Session::put('user', Auth::user());
+            return redirect()->route('home');
         }else{
             return redirect()->route('login')->with('info', 'Failed to connect.');
         }
-        */
+
     }
 
     public function logout()

@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('acceuil');
+Route::get('/info', function () {
+    return view('info');
 });
 
 Route::resource('utilisateurs', 'UtilisateurController');
@@ -33,7 +33,8 @@ Route::post('/register', 'RegistrationController@register');
 
 // Protected Routes - allows only logged in users
 Route::middleware('auth')->group(function () {
-    Route::get('/', 'DashboardController@index');
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::post('/logout', 'LoginController@logout');
+    Route::get('/logout', 'LoginController@logout')->name('logout');
 });

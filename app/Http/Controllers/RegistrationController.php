@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegistrationRequest;
+use App\Modeles\Utilisateur;
 use App\Traits\RegisterUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class RegistrationController extends Controller
@@ -19,8 +21,17 @@ class RegistrationController extends Controller
 
     public function register(RegistrationRequest $requestFields)
     {
-        $user = $this->registerUser($requestFields);
-        return redirect('/login');
+        $user = Utilisateur::where('mail', $requestFields->mail)->first();
+        if($user != null){
+            Session::flash('alert', 'warning');
+            Session::flash('warning', 'Mail address already used.');
+            return redirect()->route('register');
+        }else {
+            $user = $this->registerUser($requestFields);
+            Session::flash('alert', 'success');
+            Session::flash('success', 'Successfully registered. Try logging in!');
+            return redirect('/login');
+        }
     }
 
 }

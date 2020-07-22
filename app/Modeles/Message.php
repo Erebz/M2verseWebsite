@@ -10,11 +10,11 @@ class Message extends Model
     protected $fillable = ['date_message', 'texte', 'image'];
 
     public function auteurMessage(){
-        return $this->belongsTo(Utilisateur::class, 'auteur');
+        return $this->belongsTo(Utilisateur::class, 'auteur', 'id');
     }
 
     public function publicationOrigine(){
-        return $this->belongsTo(Publication::class, 'publication');
+        return $this->belongsTo(Publication::class, 'publication', 'id');
     }
 
     /*

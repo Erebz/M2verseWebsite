@@ -1,11 +1,11 @@
 @extends('template')
 
 @section('titrePage')
-    M2V - Communautés
+    M2V - Communities
 @endsection
 
 @section('titreItem')
-    <h1>Communautés</h1>
+    <h1>Communities</h1>
 @endsection
 
 @section('contenu')

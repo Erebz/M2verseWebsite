@@ -40,7 +40,7 @@
     <h3>Publications : </h3>
     @foreach($publications as $pub)
         <h5>Titre : {{$pub->titre}}</h5>
-        <p>Auteur : {{$pub->auteurPublication->nom}}</p>
+        <p>Auteur : {{$pub->auteurPublication->nom ?? ''}}</p>
         <p>Texte : {{$pub->texte}}</p>
         <p>Image : {{$pub->image}}</p>
         <p>Posté dans : {{$pub->communautePublication->nom}}</p>
@@ -51,7 +51,7 @@
         <div class="card">
             <h5 class="card-header">{{$com->nom}}</h5>
             <div class="card-body">
-                <p class="card-text">Auteur : {{$mes->auteurMessage->nom}}</p>
+                <p class="card-text">Auteur : {{$mes->auteurMessage->nom ?? ''}}</p>
                 <p class="card-text">Texte : {{$mes->texte}}</p>
                 <p class="card-text">Image : {{$mes->image}}</p>
                 <p class="card-text">Réponse à : {{$mes->publicationOrigine->titre}}</p>

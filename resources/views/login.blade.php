@@ -3,15 +3,18 @@
 @section('contenu')
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h1 class="display-3">M2verse.</h1>
-            <p class="lead">Create. Share. Like never before.</p>
+            <h1 class="display-5 author font-weight-light">Enter M2verse</h1>
             <hr class="my-4">
-            <h1 class="display-5 author font-weight-light">Login</h1>
-            <div class="col-sm-offset-3 col-sm-6">
+            <div class="w-50 mx-auto text-center">
+                @if (Session::get('alert'))
+                    <div class="alert alert-{!! Session::get('alert') !!}">
+                        {!! Session::get(Session::get('alert')) !!}
+                    </div>
+                @endif
                 <div class="card">
                     <p class="card-header display-5 author font-weight-light">Login</p>
                     <div class="card-body">
-                        {!! Form::open(['action' => 'LoginController@authenticate']) !!}
+                        {!! Form::open(['route' => 'login', 'method' => 'post']) !!}
                         <div class="form-group {!! $errors->has('mail') ? 'has-error' : '' !!}">
                             {!! Form::email('mail', null, ['class' => 'form-control', 'placeholder' => 'Email...']) !!}
                             {!! $errors->first('mail', '<small class="help-block text-danger">:message</small>') !!}
