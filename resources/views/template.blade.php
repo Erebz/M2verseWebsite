@@ -19,21 +19,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{url('/')}}">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="" id="navbardrop" data-toggle="dropdown">
-                        Browse...
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{url('/communautes')}}">Communities</a>
-                        <a class="dropdown-item" href="{{url('/utilisateurs')}}">Users</a>
-                    </div>
-                </li>
                 @if(Session::get('user') != null)
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{url('/')}}">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="" id="navbardrop" data-toggle="dropdown">
+                            Browse...
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{url('/communautes')}}">Communities</a>
+                            <a class="dropdown-item" href="{{url('/utilisateurs')}}">Users</a>
+                        </div>
+                    </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="{{route('home')}}"> {{Session::get('user')->pseudo}}
                             <span class="sr-only">(current)</span>

@@ -44,7 +44,9 @@ class LoginController extends Controller
     {
         Session::flush();
         Auth::logout();
-        return back();
+        Session::flash("alert", "success");
+        Session::flash("success", "Successfully logged out.");
+        return redirect()->route('login');
     }
 
 }
