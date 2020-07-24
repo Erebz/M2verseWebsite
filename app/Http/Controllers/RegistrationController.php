@@ -25,7 +25,7 @@ class RegistrationController extends Controller
         if($user != null){
             Session::flash('alert', 'warning');
             Session::flash('warning', 'Mail address already used.');
-            return redirect()->route('register');
+            return back()->withInput();
         }else {
             $user = $this->registerUser($requestFields);
             Session::flash('alert', 'success');

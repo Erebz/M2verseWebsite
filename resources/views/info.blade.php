@@ -1,6 +1,8 @@
 @extends('template')
 
-{!! Html::style('styles/style_welcome.css') !!}
+@section('titrePage')
+    M2V - About us
+@endsection
 
 @section('contenu')
     <div class="jumbotron jumbotron-fluid">

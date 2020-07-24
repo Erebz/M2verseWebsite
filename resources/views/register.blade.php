@@ -1,5 +1,9 @@
 @extends('template')
 
+@section('titrePage')
+    M2V - Register
+@endsection
+
 @section('contenu')
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
@@ -28,14 +32,14 @@
                             {!! $errors->first('mail', '<small class="help-block text-danger">:message</small>') !!}
                         </div>
                         <div class="form-group {!! $errors->has('password') ? 'has-error' : '' !!}">
-                            {!! Form::text('password', null, ['class' => 'form-control', 'placeholder' => 'Password...']) !!}
+                            {{ Form::password('password', array('id' => 'password', "class" => "form-control", "placeholder" => "Password (6 characters min)...")) }}
                             {!! $errors->first('password', '<small class="help-block text-danger">:message</small>') !!}
                         </div>
                         <div class="form-group {!! $errors->has('anniversaire') ? 'has-error' : '' !!}">
                             {!! Form::date('anniversaire', null, ['class' => 'form-control', 'placeholder' => 'Birthday...']) !!}
                             {!! $errors->first('anniversaire', '<small class="help-block text-danger">:message</small>') !!}
                         </div>
-                        {!! Form::submit('Register', ['class' => 'btn btn-info pull-right']) !!}
+                        {!! Form::submit('Submit', ['class' => 'btn btn-info pull-right']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>

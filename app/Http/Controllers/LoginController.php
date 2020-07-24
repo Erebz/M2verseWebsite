@@ -33,7 +33,9 @@ class LoginController extends Controller
             Session::put('user', Auth::user());
             return redirect()->route('home');
         }else{
-            return redirect()->route('login')->with('info', 'Failed to connect.');
+            Session::flash("alert", "warning");
+            Session::flash("warning", "Incorrect email/password. Please retry.");
+            return back()->withInput();
         }
 
     }
