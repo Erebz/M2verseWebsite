@@ -16,8 +16,10 @@
                 <p class="card-text">{{$com->description}}</p>
                 <p class="card-text">Nombres de membres : {{sizeof($com->membres)}}</p>
                 <p class="card-text">Nombres de publications : {{sizeof($com->publications)}}</p>
-                <a href="{{ route('communautes.show', $com->id) }}" class="btn btn-primary">Voir</a>
-                <a href="#" class="btn btn-secondary">Rejoindre</a>
+                <a href="{{ route('communautes.show', $com->id) }}" class="btn btn-primary">Explore</a>
+                {!! Form::open(array('route' => array('communaute.join', $com->id), 'method' => 'post', 'class'=>'inlineElement')) !!}
+                {!! Form::submit('Join', ['class' => 'btn btn-secondary inlineElement']) !!}
+                {!! Form::close() !!}
             </div>
         </div>
     @endforeach

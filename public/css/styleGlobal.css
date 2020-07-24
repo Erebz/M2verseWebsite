@@ -1,3 +1,7 @@
 .author, .footer, .centerText{
     text-align: center;
 }
+
+.inlineElement{
+    display: inline;
+}

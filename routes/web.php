@@ -36,5 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::get('/logout', 'LoginController@logout')->name('logout');
+    //Community features
+    Route::post('/communautes/{com}/join', 'CommunauteController@joinCom')->name('communaute.join');
+    Route::post('/communautes/{com}/leave', 'CommunauteController@leaveCom')->name('communaute.leave');
+
+    Route::post('/logout', 'LoginController@logout')->name('logout');
 });

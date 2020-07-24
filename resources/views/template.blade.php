@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     {!! Html::style('lib/bootstrap/bootstrap.css') !!}
-    {!! Html::style('styles/style_welcome.css') !!}
-    {{ Html::favicon( 'img/favicon.png' ) }}
+    {!! Html::style('css/styleGlobal.css') !!}
+    {{ Html::favicon('img/favicon.png') }}
 
     <title>@yield('titrePage')</title>
 </head>
@@ -20,10 +20,17 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 @if(Session::get('user') != null)
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{url('/')}}">Home
-                            <span class="sr-only">(current)</span>
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="" id="navbardrop" data-toggle="dropdown">
+                            {{Session::get('user')->pseudo}}
                         </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{route('home')}}">Home</a>
+                            <a class="dropdown-item" href="{{route('home')}}">Profile</a>
+                            {!! Form::open(['method' => 'post', 'route' => 'logout', 'class' => 'dropdown-item inlineElement']) !!}
+                            {!! Form::submit('Logout') !!}
+                            {!! Form::close() !!}
+                        </div>
                     </li>
                     <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="" id="navbardrop" data-toggle="dropdown">
@@ -33,16 +40,6 @@
                             <a class="dropdown-item" href="{{url('/communautes')}}">Communities</a>
                             <a class="dropdown-item" href="{{url('/utilisateurs')}}">Users</a>
                         </div>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{route('home')}}"> {{Session::get('user')->pseudo}}
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{route('logout')}}"> Logout
-                            <span class="sr-only">(current)</span>
-                        </a>
                     </li>
                 @else
                     <li class="nav-item active">

@@ -10,6 +10,11 @@
 
 @section('contenu')
     <p>{{$description}}</p>
+    @if (Session::get('alert'))
+        <div class="alert alert-{!! Session::get('alert') !!}">
+            {!! Session::get(Session::get('alert')) !!}
+        </div>
+    @endif
     @foreach($publications as $pub)
         <div class="card">
             <h5 class="card-header">{{$pub->titre}}</h5>
