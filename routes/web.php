@@ -40,5 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/communautes/{com}/join', 'CommunauteController@joinCom')->name('communaute.join');
     Route::post('/communautes/{com}/leave', 'CommunauteController@leaveCom')->name('communaute.leave');
 
+    //Publication features
+    Route::get('/publications/{publication}', 'PublicationController@show')->name('publication.show');
+
     Route::post('/logout', 'LoginController@logout')->name('logout');
 });

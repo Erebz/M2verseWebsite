@@ -61,10 +61,12 @@ class Utilisateur extends Authenticatable
         return $this->amiAvec->merge($this->amiDe);
     }
 
-
-
     public function getLikedPublicationsAttribute(){
         return $this->belongsToMany(Publication::class, 'likes', 'utilisateur_id', 'publication_id');
+    }
+
+    public function isMemberOf(Communaute $com){
+        return ($this->communautes->contains($com));
     }
 
     //public function setPasswordAttribute($password)

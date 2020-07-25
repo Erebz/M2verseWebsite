@@ -107,6 +107,7 @@ class CommunauteController extends Controller
     {
         $nom = $communaute->nom;
         $description = $communaute->description;
+        //TODO : trier publications par date
         $publications = $communaute->publications;
         $membres = $communaute->membres;
 

@@ -25,9 +25,9 @@
                                 <div class="card-body">
                                     <p class="card-text">{{$com->description}}</p>
                                     <div class="text-center">
-                                        <a href="{{ route('communautes.show', $com->id) }}" class="btn btn-primary">Enter</a>
+                                        <a href="{{ route('communautes.show', $com->id) }}" class="btn btn-primary">Explore</a>
                                         {!! Form::open(array('route' => array('communaute.leave', $com->id), 'method' => 'post', 'class' => 'inlineElement')) !!}
-                                        {!! Form::submit('Leave', ['class' => 'btn btn-secondary']) !!}
+                                        {!! Form::submit('Leave', ['class' => 'btn btn-danger']) !!}
                                         {!! Form::close() !!}
                                     </div>
                                 </div>
