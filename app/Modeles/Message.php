@@ -3,6 +3,7 @@
 namespace App\Modeles;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Session;
 
 class Message extends Model
 {
@@ -15,6 +16,16 @@ class Message extends Model
 
     public function publicationOrigine(){
         return $this->belongsTo(Publication::class, 'publication', 'id');
+    }
+
+    public function likes(){
+        return $this->belongsToMany(Utilisateur::class, 'like_comments', 'comment_id', 'utilisateur_id');
+    }
+
+    public function likedByUser(){
+        $likes = $this->likes;
+        $user = Session::get('user');
+        return $likes->contains($user);
     }
 
     /*

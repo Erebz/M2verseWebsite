@@ -15,9 +15,6 @@ Route::get('/info', function () {
     return view('info');
 });
 
-Route::resource('utilisateurs', 'UtilisateurController');
-Route::resource('communautes', 'CommunauteController');
-
 
 // Show Register Page & Login Page
 Route::get('/login', 'LoginController@show')->name('login')->middleware('guest');
@@ -36,12 +33,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/home', 'HomeController@index')->name('home');
 
+    Route::resource('utilisateurs', 'UtilisateurController');
+    Route::resource('communautes', 'CommunauteController');
+
     //Community features
     Route::post('/communautes/{com}/join', 'CommunauteController@joinCom')->name('communaute.join');
     Route::post('/communautes/{com}/leave', 'CommunauteController@leaveCom')->name('communaute.leave');
 
-    //Publication features
+    //Publication & comments features
     Route::get('/publications/{publication}', 'PublicationController@show')->name('publication.show');
+    Route::post('/publications/{publication}/like', 'PublicationController@like')->name('publication.like');
+    Route::delete('/publications/{publication}/like', 'PublicationController@dislike')->name('publication.dislike');
+    Route::post('/comments/{comment}/like', 'MessageController@like')->name('comment.like');
+    Route::delete('/comments/{comment}/like', 'MessageController@dislike')->name('comment.dislike');
 
     Route::post('/logout', 'LoginController@logout')->name('logout');
 });

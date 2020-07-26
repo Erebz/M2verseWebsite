@@ -23,7 +23,15 @@
             <div class="card-body">
                 <p class="card-text">{{$pub->texte}}</p>
                 <p><small class="card-text font-italic">Par {{$pub->auteurPublication->pseudo}}, le {{$pub->date_publication}}</small></p>
-                <a href="#" class="btn btn-primary">Yeah ({{sizeof($pub->likes)}})</a>
+                @if(!$pub->likedByUser())
+                    {!! Form::open(array('route' => array('publication.like', $pub->id), 'method' => 'post', 'class' => 'inlineElement')) !!}
+                    {!! Form::submit('Yeah! ('.sizeof($pub->likes).')', ['class' => 'btn btn-success']) !!}
+                    {!! Form::close() !!}
+                @else
+                    {!! Form::open(array('route' => array('publication.dislike', $pub->id), 'method' => 'delete', 'class' => 'inlineElement')) !!}
+                    {!! Form::submit('Yeah! ('.sizeof($pub->likes).')', ['class' => 'btn btn-secondary']) !!}
+                    {!! Form::close() !!}
+                @endif
                 <a href="{{route('publication.show', $pub)}}" class="btn btn-secondary">Commenter ({{sizeof($pub->reponsesPublication)}})</a>
             </div>
         </div><br/>

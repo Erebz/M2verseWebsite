@@ -2,9 +2,13 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
+    {!! Html::script('lib/jquery/jquery-3.5.1.js') !!}
+    {!! Html::script('lib/js/bootstrap.bundle.js') !!}
+    {!! Html::script('lib/js/bootstrap.js') !!}
     {!! Html::style('lib/bootstrap/bootstrap.css') !!}
     {!! Html::style('css/styleGlobal.css') !!}
     {{ Html::favicon('img/favicon.png') }}
+    <script src="http://unpkg.com/turbolinks"></script>
 
     <title>@yield('titrePage')</title>
 </head>
@@ -76,8 +80,5 @@
     <p>M2verse - 2020 - Erebz</p>
     <p></p>
 </footer>
-{!! Html::script('lib/jquery/jquery-3.5.1.js') !!}
-{!! Html::script('lib/js/bootstrap.bundle.js') !!}
-{!! Html::script('lib/js/bootstrap.js') !!}
 </body>
 </html>

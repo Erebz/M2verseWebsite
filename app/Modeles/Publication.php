@@ -3,6 +3,7 @@
 namespace App\Modeles;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Session;
 
 class Publication extends Model
 {
@@ -23,6 +24,12 @@ class Publication extends Model
 
     public function likes(){
         return $this->belongsToMany(Utilisateur::class, 'likes', 'publication_id', 'utilisateur_id');
+    }
+
+    public function likedByUser(){
+        $likes = $this->likes;
+        $user = Session::get('user');
+        return $likes->contains($user);
     }
 
     /*

@@ -65,6 +65,10 @@ class Utilisateur extends Authenticatable
         return $this->belongsToMany(Publication::class, 'likes', 'utilisateur_id', 'publication_id');
     }
 
+    public function getLikedCommentsAttribute(){
+        return $this->belongsToMany(Message::class, 'like_comments', 'utilisateur_id', 'comment_id');
+    }
+
     public function isMemberOf(Communaute $com){
         return ($this->communautes->contains($com));
     }

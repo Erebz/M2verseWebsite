@@ -26,7 +26,15 @@
             <h5 class="card-title">{{$title}}</h5>
             <p class="card-text">{{$body}}</p>
             <p><small class="card-text font-italic">Posted on {{$date}}</small></p>
-            <a href="#" class="btn btn-success">Yeah! ({{sizeof($publication->likes)}})</a>
+            @if(!$publication->likedByUser())
+                {!! Form::open(array('route' => array('publication.like', $publication->id), 'method' => 'post', 'class' => 'inlineElement')) !!}
+                {!! Form::submit('Yeah! ('.sizeof($publication->likes).')', ['class' => 'btn btn-success']) !!}
+                {!! Form::close() !!}
+            @else
+                {!! Form::open(array('route' => array('publication.dislike', $publication->id), 'method' => 'delete', 'class' => 'inlineElement')) !!}
+                {!! Form::submit('Yeah! ('.sizeof($publication->likes).')', ['class' => 'btn btn-secondary']) !!}
+                {!! Form::close() !!}
+            @endif
         </div>
     </div><br/>
     <hr class="my-4">
@@ -46,7 +54,15 @@
             <div class="card-body">
                 <p class="card-text">{{$comment->texte}}</p>
                 <p><small class="card-text font-italic">Posted on {{$comment->date_message}}</small></p>
-                <a href="#" class="btn btn-success">Yeah!</a>
+                @if(!$comment->likedByUser())
+                    {!! Form::open(array('route' => array('comment.like', $comment->id), 'method' => 'post', 'class' => 'inlineElement')) !!}
+                    {!! Form::submit('Yeah! ('.sizeof($comment->likes).')', ['class' => 'btn btn-success']) !!}
+                    {!! Form::close() !!}
+                @else
+                    {!! Form::open(array('route' => array('comment.dislike', $comment->id), 'method' => 'delete', 'class' => 'inlineElement')) !!}
+                    {!! Form::submit('Yeah! ('.sizeof($comment->likes).')', ['class' => 'btn btn-secondary']) !!}
+                    {!! Form::close() !!}
+                @endif
             </div>
         </div><br/>
     @endforeach
