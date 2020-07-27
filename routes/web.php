@@ -39,13 +39,20 @@ Route::middleware('auth')->group(function () {
     //Community features
     Route::post('/communautes/{com}/join', 'CommunauteController@joinCom')->name('communaute.join');
     Route::post('/communautes/{com}/leave', 'CommunauteController@leaveCom')->name('communaute.leave');
+    Route::post('/communautes/{com}/post', 'PublicationController@store')->name('communaute.publish');
 
     //Publication & comments features
+    //->Like/dislike
     Route::get('/publications/{publication}', 'PublicationController@show')->name('publication.show');
     Route::post('/publications/{publication}/like', 'PublicationController@like')->name('publication.like');
     Route::delete('/publications/{publication}/like', 'PublicationController@dislike')->name('publication.dislike');
     Route::post('/comments/{comment}/like', 'MessageController@like')->name('comment.like');
     Route::delete('/comments/{comment}/like', 'MessageController@dislike')->name('comment.dislike');
+    //->Comment
+    Route::post('/publications/{publication}/comment', 'MessageController@store')->name('publication.comment');
+    //->Delete
+    Route::delete('/publications/{publication}/delete', 'PublicationController@destroy')->name('publication.delete');
+    Route::delete('/comments/{comment}/delete', 'MessageController@destroy')->name('comment.delete');
 
     Route::post('/logout', 'LoginController@logout')->name('logout');
 });

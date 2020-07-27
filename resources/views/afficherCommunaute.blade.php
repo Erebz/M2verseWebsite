@@ -13,9 +13,39 @@
         <p class="text-center font-italic">{{$description}}</p>
     </div>
     @if (Session::get('alert'))
-        <div class="alert alert-{!! Session::get('alert') !!}">
+        <div class="alert alert-{!! Session::get('alert') !!} mx-auto w-50">
             {!! Session::get(Session::get('alert')) !!}
         </div>
+    @endif
+    @if($communaute->isUserMember())
+        <div class="card mx-auto w-50">
+            <div class="card-header text-center">
+                <a class="btn btn-primary" data-toggle="collapse" href="#publishForm" role="button" aria-expanded="false" aria-controls="publishForm">
+                    New post&nbsp<i class="fas fa-plus"></i>
+                </a>
+            </div>
+            <div class="card-body collapse" id="publishForm">
+                {!! Form::open(['route' => ['communaute.publish', $communaute->id], 'method' => 'post']) !!}
+                <div class="form-group {!! $errors->has('title') ? 'has-error' : '' !!}">
+                    {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Title']) !!}
+                    {!! $errors->first('title', '<small class="help-block text-danger">:message</small>') !!}
+                </div>
+                <div class="form-group {!! $errors->has('body') ? 'has-error' : '' !!}">
+                    {!! Form::textarea('body', null, ['class' => 'form-control', 'placeholder' => 'Share something!', 'rows'=>'4']) !!}
+                    {!! $errors->first('body', '<small class="help-block text-danger">:message</small>') !!}
+                </div>
+                <div class="text-center">
+                    {!! Form::submit('Publish', ['class' => 'btn btn-info pull-right', 'id' => 'publishBtn']) !!}
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </div><br/>
+    @else
+        <div class="text-center">
+            {!! Form::open(array('route' => array('communaute.join', $communaute->id), 'method' => 'post', 'class'=>'inlineElement')) !!}
+            {!! Form::submit('Join this community', ['class' => 'btn btn-success inlineElement']) !!}
+            {!! Form::close() !!}
+        </div><br/>
     @endif
     @foreach($publications as $pub)
         <div class="card mx-auto w-50">

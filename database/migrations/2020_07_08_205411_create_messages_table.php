@@ -15,7 +15,7 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('date_message');
+            $table->dateTime('date_message');
             $table->string('texte');
             $table->string('image');
 

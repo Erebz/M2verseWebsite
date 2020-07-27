@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Session;
 class Message extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['date_message', 'texte', 'image'];
+    protected $fillable = ['date_message', 'texte', 'image', 'auteur', 'publication'];
 
     public function auteurMessage(){
         return $this->belongsTo(Utilisateur::class, 'auteur', 'id');

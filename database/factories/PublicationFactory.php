@@ -13,6 +13,6 @@ $factory->define(Publication::class, function (Faker $faker) {
         'spoiler' => $faker->boolean,
         'auteur' => $faker->numberBetween(1, 10),
         'communaute' => $faker->numberBetween(1, 3),
-        'date_publication' => $faker->date('Y-m-d')
+        'date_publication' => $faker->dateTimeThisMonth()->format('Y-m-d H:i:s')
     ];
 });

@@ -43,6 +43,26 @@
     </div><br/>
     <hr class="my-4">
     <h4 class="text-center">Comments ({{sizeof($comments)}})</h4>
+        @if($community->isUserMember())
+            <div class="card mx-auto w-50">
+                <div class="card-header text-center">
+                    <a class="btn btn-primary" data-toggle="collapse" href="#commentForm" role="button" aria-expanded="false" aria-controls="commentForm">
+                        Post a comment&nbsp<i class="fas fa-plus"></i>
+                    </a>
+                </div>
+                <div class="card-body collapse" id="commentForm">
+                    {!! Form::open(['route' => ['publication.comment', $publication->id], 'method' => 'post']) !!}
+                    <div class="form-group {!! $errors->has('body') ? 'has-error' : '' !!}">
+                        {!! Form::textarea('body', null, ['class' => 'form-control', 'placeholder' => 'Say something!', 'rows'=>'4']) !!}
+                        {!! $errors->first('body', '<small class="help-block text-danger">:message</small>') !!}
+                    </div>
+                    <div class="text-center">
+                        {!! Form::submit('Comment', ['class' => 'btn btn-info pull-right', 'id' => 'commentBtn']) !!}
+                    </div>
+                    {!! Form::close() !!}
+                </div>
+            </div><br/>
+        @endif
     @foreach($comments as $comment)
         <div class="card mx-auto w-50">
             <div class="card-header">

@@ -11,6 +11,6 @@ $factory->define(Message::class, function (Faker $faker) {
         'image' => $faker->sentence(1, false) . "png",
         'auteur' => $faker->numberBetween(1, 10),
         'publication' => $faker->numberBetween(1, 10),
-        'date_message' => $faker->date('Y-m-d')
+        'date_message' => $faker->dateTimeThisMonth()->format('Y-m-d H:i:s')
     ];
 });

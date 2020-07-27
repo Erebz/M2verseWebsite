@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PublicationRequest;
+use App\Modeles\Communaute;
 use App\Modeles\Like;
 use App\Modeles\Publication;
+use App\Traits\PublishPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class PublicationController extends Controller
 {
+    use PublishPost;
+
     public function show(Publication $publication){
         //TODO : trier les réponses par date
         $comments = $publication->reponsesPublicationOrderByDate(false);
@@ -39,5 +44,10 @@ class PublicationController extends Controller
             $like->delete();
         }
         //return back()->send();
+    }
+
+    public function store(PublicationRequest $request, Communaute $com){
+        $this->publish($request, $com, Session::get('user'));
+        return back()->send();
     }
 }

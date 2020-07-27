@@ -16,7 +16,7 @@ class CreatePublicationsTable extends Migration
         Schema::create('publications', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('titre');
-            $table->date('date_publication');
+            $table->dateTime('date_publication');
             $table->boolean('spoiler');
             $table->string('texte');
             $table->string('image');

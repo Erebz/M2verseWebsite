@@ -3,6 +3,7 @@
 namespace App\Modeles;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Session;
 
 class Communaute extends Model
 {
@@ -24,5 +25,11 @@ class Communaute extends Model
 
     public function membres(){
         return $this->belongsToMany(Utilisateur::class, 'appartenances', 'communaute_id', 'utilisateur_id');
+    }
+
+    public function isUserMember(){
+        $membres = $this->membres;
+        $user = Session::get('user');
+        return $membres->contains($user);
     }
 }

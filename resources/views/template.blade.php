@@ -9,6 +9,7 @@
     {!! Html::script('js/fonctions.js') !!}
     {!! Html::style('lib/bootstrap/bootstrap.css') !!}
     {!! Html::style('css/styleGlobal.css') !!}
+    <link rel="stylesheet" type="text/css" href="{{url('lib/fontawesome/css/all.css')}}" media="screen,projection"/>
     {{ Html::favicon('img/favicon.png') }}
     <script src="http://unpkg.com/turbolinks"></script>
 
@@ -25,7 +26,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                @if(Session::get('user') != null)
+                @auth()
                     <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="" id="navbardrop" data-toggle="dropdown">
                             {{Session::get('user')->pseudo}}

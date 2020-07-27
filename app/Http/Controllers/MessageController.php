@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentRequest;
 use App\Modeles\LikeComment;
 use App\Modeles\Message;
-use Illuminate\Http\Request;
+use App\Modeles\Publication;
+use App\Traits\CommentPost;
 use Illuminate\Support\Facades\Session;
 
 class MessageController extends Controller
 {
+    use CommentPost;
+
     public function like(Message $comment){
         if(!$comment->likedByUser()){
             $user = Session::get('user');
@@ -27,5 +31,10 @@ class MessageController extends Controller
             $like->delete();
         }
         //return back()->send();
+    }
+
+    public function store(CommentRequest $request, Publication $publication){
+        $this->comment($request, $publication, Session::get('user'));
+        return back()->send();
     }
 }
