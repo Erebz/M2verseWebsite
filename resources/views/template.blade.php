@@ -2,9 +2,11 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     {!! Html::script('lib/jquery/jquery-3.5.1.js') !!}
     {!! Html::script('lib/js/bootstrap.bundle.js') !!}
     {!! Html::script('lib/js/bootstrap.js') !!}
+    {!! Html::script('js/fonctions.js') !!}
     {!! Html::style('lib/bootstrap/bootstrap.css') !!}
     {!! Html::style('css/styleGlobal.css') !!}
     {{ Html::favicon('img/favicon.png') }}

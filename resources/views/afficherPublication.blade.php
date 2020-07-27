@@ -27,13 +27,17 @@
             <p class="card-text">{{$body}}</p>
             <p><small class="card-text font-italic">Posted on {{$date}}</small></p>
             @if(!$publication->likedByUser())
-                {!! Form::open(array('route' => array('publication.like', $publication->id), 'method' => 'post', 'class' => 'inlineElement')) !!}
-                {!! Form::submit('Yeah! ('.sizeof($publication->likes).')', ['class' => 'btn btn-success']) !!}
-                {!! Form::close() !!}
+                <button id="yeahButtonPub{{$publication->id}}" class="btn btn-success" onclick="likePublication({{$publication->id}})">
+                    Yeah!
+                    (<span id="yeahCountPub{{$publication->id}}">{{sizeof($publication->likes)}}</span>)
+                    <input id="routeLikePub{{$publication->id}}" type="hidden" value="{{route('publication.like', $publication->id)}}">
+                </button>
             @else
-                {!! Form::open(array('route' => array('publication.dislike', $publication->id), 'method' => 'delete', 'class' => 'inlineElement')) !!}
-                {!! Form::submit('Yeah! ('.sizeof($publication->likes).')', ['class' => 'btn btn-secondary']) !!}
-                {!! Form::close() !!}
+                <button id="yeahButtonPub{{$publication->id}}" class="btn btn-secondary" onclick="dislikePublication({{$publication->id}})">
+                    Yeah!
+                    (<span id="yeahCountPub{{$publication->id}}">{{sizeof($publication->likes)}}</span>)
+                    <input id="routeLikePub{{$publication->id}}" type="hidden" value="{{route('publication.like', $publication->id)}}">
+                </button>
             @endif
         </div>
     </div><br/>
@@ -55,13 +59,17 @@
                 <p class="card-text">{{$comment->texte}}</p>
                 <p><small class="card-text font-italic">Posted on {{$comment->date_message}}</small></p>
                 @if(!$comment->likedByUser())
-                    {!! Form::open(array('route' => array('comment.like', $comment->id), 'method' => 'post', 'class' => 'inlineElement')) !!}
-                    {!! Form::submit('Yeah! ('.sizeof($comment->likes).')', ['class' => 'btn btn-success']) !!}
-                    {!! Form::close() !!}
+                    <button id="yeahButtonCom{{$comment->id}}" class="btn btn-success" onclick="likeComment({{$comment->id}})">
+                        Yeah!
+                        (<span id="yeahCountCom{{$comment->id}}">{{sizeof($comment->likes)}}</span>)
+                        <input id="routeLikeCom{{$comment->id}}" type="hidden" value="{{route('comment.like', $comment->id)}}">
+                    </button>
                 @else
-                    {!! Form::open(array('route' => array('comment.dislike', $comment->id), 'method' => 'delete', 'class' => 'inlineElement')) !!}
-                    {!! Form::submit('Yeah! ('.sizeof($comment->likes).')', ['class' => 'btn btn-secondary']) !!}
-                    {!! Form::close() !!}
+                    <button id="yeahButtonCom{{$comment->id}}" class="btn btn-secondary" onclick="dislikeComment({{$comment->id}})">
+                        Yeah!
+                        (<span id="yeahCountCom{{$comment->id}}">{{sizeof($comment->likes)}}</span>)
+                        <input id="routeLikeCom{{$comment->id}}" type="hidden" value="{{route('comment.like', $comment->id)}}">
+                    </button>
                 @endif
             </div>
         </div><br/>

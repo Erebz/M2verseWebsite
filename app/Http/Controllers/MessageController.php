@@ -17,7 +17,7 @@ class MessageController extends Controller
                 'comment_id' => $comment->id,
             ]);
         }
-        return back()->send();
+        //return back()->send();
     }
 
     public function dislike(Message $comment){
@@ -26,6 +26,6 @@ class MessageController extends Controller
             $like = LikeComment::where('utilisateur_id', $user->id)->where('comment_id', $comment->id);
             $like->delete();
         }
-        return back()->send();
+        //return back()->send();
     }
 }

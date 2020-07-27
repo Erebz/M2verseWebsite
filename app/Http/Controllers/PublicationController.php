@@ -29,7 +29,7 @@ class PublicationController extends Controller
                 'publication_id' => $publication->id,
             ]);
         }
-        return back()->send();
+        //return back()->send();
     }
 
     public function dislike(Publication $publication){
@@ -38,6 +38,6 @@ class PublicationController extends Controller
             $like = Like::where('utilisateur_id', $user->id)->where('publication_id', $publication->id);
             $like->delete();
         }
-        return back()->send();
+        //return back()->send();
     }
 }
