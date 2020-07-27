@@ -24,13 +24,17 @@
                 <p class="card-text">{{$pub->texte}}</p>
                 <p><small class="card-text font-italic">Par {{$pub->auteurPublication->pseudo}}, le {{$pub->date_publication}}</small></p>
                 @if(!$pub->likedByUser())
-                    {!! Form::open(array('route' => array('publication.like', $pub->id), 'method' => 'post', 'class' => 'inlineElement')) !!}
-                    {!! Form::submit('Yeah! ('.sizeof($pub->likes).')', ['class' => 'btn btn-success']) !!}
-                    {!! Form::close() !!}
+                    <button id="yeahButtonPub{{$pub->id}}" class="btn btn-success" onclick="likePublication({{$pub->id}})">
+                        Yeah!
+                        (<span id="yeahCountPub{{$pub->id}}">{{sizeof($pub->likes)}}</span>)
+                        <input id="routeLikePub{{$pub->id}}" type="hidden" value="{{route('publication.like', $pub->id)}}">
+                    </button>
                 @else
-                    {!! Form::open(array('route' => array('publication.dislike', $pub->id), 'method' => 'delete', 'class' => 'inlineElement')) !!}
-                    {!! Form::submit('Yeah! ('.sizeof($pub->likes).')', ['class' => 'btn btn-secondary']) !!}
-                    {!! Form::close() !!}
+                    <button id="yeahButtonPub{{$pub->id}}" class="btn btn-secondary" onclick="dislikePublication({{$pub->id}})">
+                        Yeah!
+                        (<span id="yeahCountPub{{$pub->id}}">{{sizeof($pub->likes)}}</span>)
+                        <input id="routeLikePub{{$pub->id}}" type="hidden" value="{{route('publication.like', $pub->id)}}">
+                    </button>
                 @endif
                 <a href="{{route('publication.show', $pub)}}" class="btn btn-secondary">Commenter ({{sizeof($pub->reponsesPublication)}})</a>
             </div>
