@@ -11,7 +11,7 @@ class PublicationController extends Controller
 {
     public function show(Publication $publication){
         //TODO : trier les réponses par date
-        $comments = $publication->reponsesPublication;
+        $comments = $publication->reponsesPublicationOrderByDate(false);
         $author = $publication->auteurPublication;
         $title = $publication->titre;
         $community = $publication->communautePublication;

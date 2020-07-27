@@ -22,6 +22,14 @@ class Publication extends Model
         return $this->hasMany(Message::class, 'publication', 'id');
     }
 
+    public function reponsesPublicationOrderByDate($asc = false){
+        if($asc){
+            return $this->hasMany(Message::class, 'publication', 'id')->orderBy('date_message', 'asc')->get();
+        }else{
+            return $this->hasMany(Message::class, 'publication', 'id')->orderBy('date_message', 'desc')->get();
+        }
+    }
+
     public function likes(){
         return $this->belongsToMany(Utilisateur::class, 'likes', 'publication_id', 'utilisateur_id');
     }

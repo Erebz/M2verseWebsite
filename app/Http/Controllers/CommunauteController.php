@@ -108,7 +108,7 @@ class CommunauteController extends Controller
         $nom = $communaute->nom;
         $description = $communaute->description;
         //TODO : trier publications par date
-        $publications = $communaute->publications;
+        $publications = $communaute->publicationsOrderByDate(false);
         $membres = $communaute->membres;
 
         return view('afficherCommunaute', compact('communaute', 'nom', 'description', 'publications', 'membres'));
