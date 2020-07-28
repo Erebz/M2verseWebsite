@@ -23,7 +23,9 @@
         </div>
 
         <div class="card-body">
-            <h5 class="card-title">{{$title}}</h5>
+            @if($title)
+                <h5 class="card-title">{{$title ?? ''}}</h5>
+            @endif
             <p class="card-text">{{$body}}</p>
             <p><small class="card-text font-italic">Posted on {{$date}}</small></p>
             @if(!$publication->likedByUser())

@@ -55,11 +55,14 @@
                         <img class="imageProfile" src={{url('img/mii_basic.png')}}>
                     </div>
                     <div class="col-auto mt-3">
-                        <a class="text-center" href="{{route('publication.show', $publication)}}">{{$publication->titre}}</a>
+                        <a class="text-center" href="{{route('publication.show', $publication)}}">{{$publication->auteurPublication->pseudo}}</a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
+                @if($publication->titre)
+                    <h5 class="card-title">{{$publication->titre ?? ''}}</h5>
+                @endif
                 <p class="card-text">{{$publication->texte}}</p>
                 <p><small class="card-text font-italic">Par {{$publication->auteurPublication->pseudo}}, le {{$publication->date_publication}}</small></p>
                 @if(!$publication->likedByUser())
