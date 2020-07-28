@@ -5,3 +5,28 @@
 .inlineElement{
     display: inline;
 }
+
+.imagePost, .imageProfile{
+    max-width: 100%;
+    max-height: 100%;
+    display: block; /* remove extra space below image */
+}
+.boxPost{
+    width: fit-content;
+}
+.boxPost.large{
+    height: 300px;
+}
+.boxPost.small{
+    height: 100px;
+}
+.boxProfile{
+    width: 5em;
+}
+.boxProfile.small{
+    height: 5em;
+}
+.boxProfile.large{
+    width: 7em;
+    height: 7em;
+}

@@ -13,10 +13,10 @@
         <div class="card mx-auto w-50 mt-lg-2">
         <div class="card-header">
             <div class="row">
-            <div class="card col-3">
-                <p class="text-center">[MII]</p>
+            <div class="boxProfile small card">
+                <img class="imageProfile" src={{url('img/mii_basic.png')}}>
             </div>
-            <div class="col-auto">
+            <div class="col-auto mt-3">
                 <a class="text-center" href="#">{{$author->pseudo}}</a>
             </div>
             </div>
@@ -27,14 +27,14 @@
             <p class="card-text">{{$body}}</p>
             <p><small class="card-text font-italic">Posted on {{$date}}</small></p>
             @if(!$publication->likedByUser())
-                <button id="yeahButtonPub{{$publication->id}}" class="btn btn-success" onclick="likePublication({{$publication->id}})">
-                    Yeah!
+                <button id="yeahButtonPub{{$publication->id}}" class="btn btn-outline-success" onclick="likePublication({{$publication->id}})">
+                    <span id="yeahLabelPub{{$publication->id}}">Yeah</span>&nbsp<i class="far fa-thumbs-up" id="yeahIconPub{{$publication->id}}"></i>
                     (<span id="yeahCountPub{{$publication->id}}">{{sizeof($publication->likes)}}</span>)
                     <input id="routeLikePub{{$publication->id}}" type="hidden" value="{{route('publication.like', $publication->id)}}">
                 </button>
             @else
-                <button id="yeahButtonPub{{$publication->id}}" class="btn btn-secondary" onclick="dislikePublication({{$publication->id}})">
-                    Yeah!
+                <button id="yeahButtonPub{{$publication->id}}" class="btn btn-success" onclick="dislikePublication({{$publication->id}})">
+                    <span id="yeahLabelPub{{$publication->id}}">Yeah!</span>&nbsp<i class="fas fa-thumbs-up" id="yeahIconPub{{$publication->id}}"></i>
                     (<span id="yeahCountPub{{$publication->id}}">{{sizeof($publication->likes)}}</span>)
                     <input id="routeLikePub{{$publication->id}}" type="hidden" value="{{route('publication.like', $publication->id)}}">
                 </button>
@@ -51,13 +51,13 @@
                     </a>
                 </div>
                 <div class="card-body collapse" id="commentForm">
-                    {!! Form::open(['route' => ['publication.comment', $publication->id], 'method' => 'post']) !!}
+                    {!! Form::open(['route' => ['publication.comment', $publication->id], 'method' => 'post', 'id'=>'commentForm']) !!}
                     <div class="form-group {!! $errors->has('body') ? 'has-error' : '' !!}">
-                        {!! Form::textarea('body', null, ['class' => 'form-control', 'placeholder' => 'Say something!', 'rows'=>'4']) !!}
+                        {!! Form::textarea('body', null, ['class' => 'form-control', 'placeholder' => 'Say something!', 'rows'=>'4', 'id'=>'commentText', 'oninput' => 'checkCommentForm()']) !!}
                         {!! $errors->first('body', '<small class="help-block text-danger">:message</small>') !!}
                     </div>
                     <div class="text-center">
-                        {!! Form::submit('Comment', ['class' => 'btn btn-info pull-right', 'id' => 'commentBtn']) !!}
+                        {!! Form::submit('Comment', ['class' => 'btn btn-info pull-right', 'id' => 'commentBtn', 'disabled' => 'true']) !!}
                     </div>
                     {!! Form::close() !!}
                 </div>
@@ -67,26 +67,31 @@
         <div class="card mx-auto w-50">
             <div class="card-header">
                 <div class="row">
-                    <div class="card col-3">
-                        <p class="text-center">[MII]</p>
+                    <div class="boxProfile small card">
+                        <img class="imageProfile" src={{url('img/mii_basic.png')}}>
                     </div>
-                    <div class="col-auto">
-                        <a class="text-center" href="#">{{$author->pseudo}}</a>
+                    <div class="col-auto mt-3">
+                        <a class="text-center" href="#">{{$comment->auteurMessage->pseudo}}</a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 <p class="card-text">{{$comment->texte}}</p>
+                @if($comment->image != null)
+                    <div class="boxPost mx-auto">
+                        <img class="imagePost" src={{url('img/wide.jpg')}}>
+                    </div>
+                @endif
                 <p><small class="card-text font-italic">Posted on {{$comment->date_message}}</small></p>
                 @if(!$comment->likedByUser())
-                    <button id="yeahButtonCom{{$comment->id}}" class="btn btn-success" onclick="likeComment({{$comment->id}})">
-                        Yeah!
+                    <button id="yeahButtonCom{{$comment->id}}" class="btn btn-outline-success" onclick="likeComment({{$comment->id}})">
+                        <span id="yeahLabelCom{{$comment->id}}">Yeah</span>&nbsp<i class="far fa-thumbs-up" id="yeahIconCom{{$comment->id}}"></i>
                         (<span id="yeahCountCom{{$comment->id}}">{{sizeof($comment->likes)}}</span>)
                         <input id="routeLikeCom{{$comment->id}}" type="hidden" value="{{route('comment.like', $comment->id)}}">
                     </button>
                 @else
-                    <button id="yeahButtonCom{{$comment->id}}" class="btn btn-secondary" onclick="dislikeComment({{$comment->id}})">
-                        Yeah!
+                    <button id="yeahButtonCom{{$comment->id}}" class="btn btn-success" onclick="dislikeComment({{$comment->id}})">
+                        <span id="yeahLabelCom{{$comment->id}}">Yeah</span>&nbsp<i class="fas fa-thumbs-up" id="yeahIconCom{{$comment->id}}"></i>
                         (<span id="yeahCountCom{{$comment->id}}">{{sizeof($comment->likes)}}</span>)
                         <input id="routeLikeCom{{$comment->id}}" type="hidden" value="{{route('comment.like', $comment->id)}}">
                     </button>

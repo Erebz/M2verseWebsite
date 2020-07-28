@@ -47,26 +47,35 @@
             {!! Form::close() !!}
         </div><br/>
     @endif
-    @foreach($publications as $pub)
+    @foreach($publications as $publication)
         <div class="card mx-auto w-50">
-            <a class="card-header" href="{{route('publication.show', $pub)}}">{{$pub->titre}}</a>
+            <div class="card-header">
+                <div class="row">
+                    <div class="boxProfile small card">
+                        <img class="imageProfile" src={{url('img/mii_basic.png')}}>
+                    </div>
+                    <div class="col-auto mt-3">
+                        <a class="text-center" href="{{route('publication.show', $publication)}}">{{$publication->titre}}</a>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
-                <p class="card-text">{{$pub->texte}}</p>
-                <p><small class="card-text font-italic">Par {{$pub->auteurPublication->pseudo}}, le {{$pub->date_publication}}</small></p>
-                @if(!$pub->likedByUser())
-                    <button id="yeahButtonPub{{$pub->id}}" class="btn btn-success" onclick="likePublication({{$pub->id}})">
-                        Yeah!
-                        (<span id="yeahCountPub{{$pub->id}}">{{sizeof($pub->likes)}}</span>)
-                        <input id="routeLikePub{{$pub->id}}" type="hidden" value="{{route('publication.like', $pub->id)}}">
+                <p class="card-text">{{$publication->texte}}</p>
+                <p><small class="card-text font-italic">Par {{$publication->auteurPublication->pseudo}}, le {{$publication->date_publication}}</small></p>
+                @if(!$publication->likedByUser())
+                    <button id="yeahButtonPub{{$publication->id}}" class="btn btn-outline-success" onclick="likePublication({{$publication->id}})">
+                        <span id="yeahLabelPub{{$publication->id}}">Yeah</span>&nbsp<i class="far fa-thumbs-up" id="yeahIconPub{{$publication->id}}"></i>
+                        (<span id="yeahCountPub{{$publication->id}}">{{sizeof($publication->likes)}}</span>)
+                        <input id="routeLikePub{{$publication->id}}" type="hidden" value="{{route('publication.like', $publication->id)}}">
                     </button>
                 @else
-                    <button id="yeahButtonPub{{$pub->id}}" class="btn btn-secondary" onclick="dislikePublication({{$pub->id}})">
-                        Yeah!
-                        (<span id="yeahCountPub{{$pub->id}}">{{sizeof($pub->likes)}}</span>)
-                        <input id="routeLikePub{{$pub->id}}" type="hidden" value="{{route('publication.like', $pub->id)}}">
+                    <button id="yeahButtonPub{{$publication->id}}" class="btn btn-success" onclick="dislikePublication({{$publication->id}})">
+                        <span id="yeahLabelPub{{$publication->id}}">Yeah!</span>&nbsp<i class="fas fa-thumbs-up" id="yeahIconPub{{$publication->id}}"></i>
+                        (<span id="yeahCountPub{{$publication->id}}">{{sizeof($publication->likes)}}</span>)
+                        <input id="routeLikePub{{$publication->id}}" type="hidden" value="{{route('publication.like', $publication->id)}}">
                     </button>
                 @endif
-                <a href="{{route('publication.show', $pub)}}" class="btn btn-secondary">Commenter ({{sizeof($pub->reponsesPublication)}})</a>
+                <a href="{{route('publication.show', $publication)}}" class="btn btn-secondary">Commenter ({{sizeof($publication->reponsesPublication)}})</a>
             </div>
         </div><br/>
     @endforeach

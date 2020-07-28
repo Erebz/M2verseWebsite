@@ -9,7 +9,7 @@
     {!! Html::script('js/fonctions.js') !!}
     {!! Html::style('lib/bootstrap/bootstrap.css') !!}
     {!! Html::style('css/styleGlobal.css') !!}
-    <link rel="stylesheet" type="text/css" href="{{url('lib/fontawesome/css/all.css')}}" media="screen,projection"/>
+    <link rel="stylesheet" type="text/css" href="{{url('lib/FontAwesome/css/all.css')}}" media="screen,projection"/>
     {{ Html::favicon('img/favicon.png') }}
     <script src="http://unpkg.com/turbolinks"></script>
 
