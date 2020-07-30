@@ -98,8 +98,9 @@
                         {!! $errors->first('body', '<small class="help-block text-danger">:message</small>') !!}
                     </div>
                     <div class="text-center">
-                        <a class="btn btn-outline-info" data-toggle="collapse" href="#drawingBox" role="button" aria-expanded="false" aria-controls="drawingBox">
-                            Add a drawing&nbsp<i class="fas fa-pencil"></i>
+                        <a onclick="addDrawing()" id="btnAddDrawing" class="btn btn-outline-info" data-toggle="collapse" href="#drawingBox" role="button" aria-expanded="false" aria-controls="drawingBox">
+                            <span id="labelAddDrawing">Add a drawing</span>&nbsp<i class="fas fa-pencil" id="iconAddDrawing"></i>
+                            <input type="hidden" id="addDrawing" value="false">
                         </a>
                         {!! Form::submit('Comment', ['class' => 'btn btn-info pull-right', 'id' => 'commentBtn', 'disabled' => 'true']) !!}
                     </div>
@@ -127,6 +128,9 @@
                             </div>
                         </div>
                         <div class="" id="canvas"></div>
+                        <div class="mx-auto">
+                            <button id="saveBtn" onclick="saveDrawing()" type="button" class="btn btn-success"><i class="fas fa-check"></i></button>
+                        </div>
                     </div>
                     {!! Form::close() !!}
                 </div>

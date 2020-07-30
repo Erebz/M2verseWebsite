@@ -9,6 +9,7 @@ use App\Modeles\Publication;
 use App\Traits\PublishPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class PublicationController extends Controller
 {

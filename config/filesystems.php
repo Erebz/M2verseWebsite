@@ -67,4 +67,8 @@ return [
 
     ],
 
+    'links' => [
+        public_path('drawings') => storage_path('app/drawings'),
+    ],
+
 ];

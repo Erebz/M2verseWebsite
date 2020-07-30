@@ -26,8 +26,8 @@ class PublicationRequest extends FormRequest
         return [
             //'spoiler'      => ['boolean'],
             'title'     => ['max:50'],
-            'body'  => ['required', 'max:300'],
-            //'image' => [''],
+            'body'  => ['max:300'],
+            'image' => ['max:2000'],
         ];
     }
 }

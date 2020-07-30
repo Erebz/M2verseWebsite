@@ -76,6 +76,40 @@ function sendRequest(json, method, url){
         .catch(function(res){ console.log(res) });
 }
 
+function addDrawing(){
+    let addDrawing = document.getElementById('addDrawing');
+    addDrawing.value = "true";
+    let btn = document.getElementById('btnAddDrawing');
+    btn.setAttribute('class', 'btn btn-danger');
+    btn.setAttribute('onclick', 'removeDrawing()');
+    let label = document.getElementById('labelAddDrawing');
+    label.innerHTML = "Remove drawing";
+    let icon = document.getElementById('iconAddDrawing');
+    icon.setAttribute('class', 'fa fa-times');
+}
+
+function removeDrawing(){
+    let addDrawing = document.getElementById('addDrawing');
+    addDrawing.value = "false";
+    let btn = document.getElementById('btnAddDrawing');
+    btn.setAttribute('class', 'btn btn-outline-info');
+    btn.setAttribute('onclick', 'addDrawing()');
+    let label = document.getElementById('labelAddDrawing');
+    label.innerHTML = "Add a drawing";
+    let icon = document.getElementById('iconAddDrawing');
+    icon.setAttribute('class', 'fa fa-pencil');
+}
+
+function checkPublicationForm(){
+    let form = document.getElementById('publicationForm');
+    let body = document.getElementById('publicationText');
+    if(body.value.replace(/ /g, "") !== ""){
+        document.getElementById('publicationBtn').disabled = false;
+    }else{
+        document.getElementById('publicationBtn').disabled = true;
+    }
+}
+
 function checkCommentForm(){
     let form = document.getElementById('commentForm');
     let body = document.getElementById('commentText');
