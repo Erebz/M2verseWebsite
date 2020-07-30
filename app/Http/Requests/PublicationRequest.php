@@ -27,7 +27,8 @@ class PublicationRequest extends FormRequest
             //'spoiler'      => ['boolean'],
             'title'     => ['max:50'],
             'body'  => ['max:300'],
-            'image' => ['max:2000'],
+            'image' => [''],
+            'hasImage' => [''],
         ];
     }
 }

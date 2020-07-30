@@ -12,6 +12,7 @@ function setup() {
     canvas = createCanvas(sizeX, sizeY);
     pixelDensity(1);
     canvas.parent('canvas');
+    //canvas.id('drawingContext');
     stroke(color);
     strokeWeight(sizeTool);
     document.getElementById('btnPencil2').setAttribute('class', 'btn btn-secondary');

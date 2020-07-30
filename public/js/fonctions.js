@@ -128,7 +128,7 @@ function checkForm(){
     let addDrawing = document.getElementById('addDrawing');
     let body = document.getElementById('bodyInput');
     let title = document.getElementById('titleInput');
-    let submitOk = false;
+    let submitOk = false, imageOK = false;
 
     if(title != null && title.value.replace(/ /g, "") === ""){
         title.value = null;
@@ -139,29 +139,55 @@ function checkForm(){
     }
 
     if(addDrawing != null && addDrawing.value === "true"){
-        console.log("Ajout d'un dessin !");
+        //console.log("Ajout d'un dessin !");
         if(isCanvasEmpty()){
-            console.log("Le dessin est vide.");
+            //console.log("Le dessin est vide.");
             if(submitOk){
                 let choice = confirm("The drawing is empty. It won't be sent. Continue?");
                 if(choice){
-                    console.log("Envoi d'un post sans image.");
-                    console.log("[SUBMIT]");
+                    //console.log("Envoi d'un post sans image.");
+                    //console.log("[SUBMIT]");
+                    imageOK = true;
                 }else{
-                    console.log("Pas de submit.");
+                    //console.log("Pas de submit.");
+                    submitOk = false;
                 }
             }
         }else{
-            console.log("Le dessin n'est pas vide.");
+            //console.log("Le dessin n'est pas vide.");
             submitOk = true;
+            imageOK = true;
         }
     }
 
-    if(submitOk){
-        console.log("Le post peut être envoyé.");
-    }else{
-        console.log("Le post ne peut pas être envoyé.");
-    }
+    //if(submitOk){
+    //    console.log("Le post peut être envoyé.");
+    //}else{
+    //    console.log("Le post ne peut pas être envoyé.");
+    //}
 
-    return false;
+    if(submitOk){
+        if(imageOK) {
+            let drawing = document.getElementsByClassName('p5Canvas')[0];
+            let dataURL = drawing.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, "");
+            let imgData = document.getElementById('imageDataURL');
+            imgData.value = dataURL;
+        }
+        return false;
+    }else{
+        return false;
+    }
+}
+
+function sendImagePost(dataURL, urlPOST){
+    fetch(urlPOST, {
+        method: 'post',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(json)
+    }).then(function(res){ console.log(res) })
+        .catch(function(res){ console.log(res) });
 }
