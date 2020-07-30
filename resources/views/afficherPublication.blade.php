@@ -1,7 +1,7 @@
 @extends('template')
 
 <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
-{!! Html::script('js/m2vSketch.js') !!}
+{!! Html::script('js/m2vSketch2.js') !!}
 
 @section('titrePage')
     M2V - {{$author->pseudo}} : {{$title}}
@@ -112,6 +112,7 @@
                             </div>
                             <div class="btn-group mr-4" role="group" aria-label="undo">
                                 <button id="btnUndo" onclick="undo()" type="button" class="btn btn-outline-info"><i class="fas fa-undo-alt"></i></button>
+                                <button id="btnRedo" onclick="redo()" type="button" class="btn btn-outline-info"><i class="fas fa-redo-alt"></i></button>
                             </div>
                             <div class="btn-group mr-2" role="group" aria-label="pencils">
                                 <button id="btnPencil1" onclick="pencil(1)" type="button" class="btn btn-outline-secondary"><i class="fas fa-pencil-alt fa-sm"></i></button>

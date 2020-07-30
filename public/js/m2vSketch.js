@@ -100,3 +100,7 @@ function isCanvasEmpty(){
     }
     return empty;
 }
+
+function redo(){
+
+}
