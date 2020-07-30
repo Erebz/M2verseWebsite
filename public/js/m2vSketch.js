@@ -5,6 +5,7 @@ let buffers = [], activeBuffer;
 let inputActive = false;
 
 function setup() {
+    console.log("HELLO");
     buffers[0] = createGraphics(sizeX, sizeY);
     buffers[1] = createGraphics(sizeX, sizeY);
     activeBuffer = 0;

@@ -1,10 +1,11 @@
 @extends('template')
 
+<script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+{!! Html::script('js/m2vSketch.js') !!}
+
 @section('titrePage')
     M2V - {{$author->pseudo}} : {{$title}}
 @endsection
-<script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
-{!! Html::script('js/m2vSketch.js') !!}
 
 @section('titreItem')
     <h1 class="text-center">{{$community->nom}}</h1><br/>

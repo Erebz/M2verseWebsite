@@ -11,7 +11,7 @@
     {!! Html::style('css/styleGlobal.css') !!}
     <link rel="stylesheet" type="text/css" href="{{url('lib/FontAwesome/css/all.css')}}" media="screen,projection"/>
     {{ Html::favicon('img/favicon.png') }}
-    <script src="http://unpkg.com/turbolinks"></script>
+    <!--<script src="http://unpkg.com/turbolinks"></script>-->
 
     <title>@yield('titrePage')</title>
 </head>
