@@ -30,3 +30,20 @@
     width: 7em;
     height: 7em;
 }
+
+#canvas{
+    margin: 0 auto;
+    width: 500px;
+    height: 300px;
+    outline-style: solid;
+    outline-color: #155724;
+}
+
+#toolbox{
+    margin: auto;
+    width: 500px;
+    height: 50px;
+    outline-style: solid;
+    outline-color: #155724;
+    /*background: rgba(0,116,107,0.58);*/
+}
