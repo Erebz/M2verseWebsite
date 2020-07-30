@@ -16,6 +16,7 @@ function setup() {
     strokeWeight(sizeTool);
     document.getElementById('btnPencil2').setAttribute('class', 'btn btn-secondary');
     updateStepsButtons();
+    background(255);
 }
 
 function draw() {
