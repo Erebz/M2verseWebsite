@@ -101,6 +101,7 @@ function removeDrawing(){
 }
 
 function checkPublicationForm(){
+   /*
     let form = document.getElementById('publicationForm');
     let body = document.getElementById('publicationText');
     if(body.value.replace(/ /g, "") !== ""){
@@ -108,9 +109,11 @@ function checkPublicationForm(){
     }else{
         document.getElementById('publicationBtn').disabled = true;
     }
+    */
 }
 
 function checkCommentForm(){
+    /*
     let form = document.getElementById('commentForm');
     let body = document.getElementById('commentText');
     if(body.value.replace(/ /g, "") !== ""){
@@ -118,4 +121,47 @@ function checkCommentForm(){
     }else{
         document.getElementById('commentBtn').disabled = true;
     }
+    */
+}
+
+function checkForm(){
+    let addDrawing = document.getElementById('addDrawing');
+    let body = document.getElementById('bodyInput');
+    let title = document.getElementById('titleInput');
+    let submitOk = false;
+
+    if(title != null && title.value.replace(/ /g, "") === ""){
+        title.value = null;
+    }
+
+    if(body != null && body.value.replace(/ /g, "") !== "") {
+        submitOk = true;
+    }
+
+    if(addDrawing != null && addDrawing.value === "true"){
+        console.log("Ajout d'un dessin !");
+        if(isCanvasEmpty()){
+            console.log("Le dessin est vide.");
+            if(submitOk){
+                let choice = confirm("The drawing is empty. It won't be sent. Continue?");
+                if(choice){
+                    console.log("Envoi d'un post sans image.");
+                    console.log("[SUBMIT]");
+                }else{
+                    console.log("Pas de submit.");
+                }
+            }
+        }else{
+            console.log("Le dessin n'est pas vide.");
+            submitOk = true;
+        }
+    }
+
+    if(submitOk){
+        console.log("Le post peut être envoyé.");
+    }else{
+        console.log("Le post ne peut pas être envoyé.");
+    }
+
+    return false;
 }

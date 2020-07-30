@@ -92,9 +92,9 @@
                     </a>
                 </div>
                 <div class="card-body collapse" id="commentForm">
-                    {!! Form::open(['route' => ['publication.comment', $publication->id], 'method' => 'post', 'id'=>'commentForm']) !!}
+                    {!! Form::open(['route' => ['publication.comment', $publication->id], 'method' => 'post', 'id'=>'commentForm', 'onsubmit' => 'return checkForm();']) !!}
                     <div class="form-group {!! $errors->has('body') ? 'has-error' : '' !!}">
-                        {!! Form::textarea('body', null, ['class' => 'form-control', 'placeholder' => 'Say something!', 'rows'=>'4', 'id'=>'commentText', 'oninput' => 'checkCommentForm()']) !!}
+                        {!! Form::textarea('body', null, ['class' => 'form-control', 'placeholder' => 'Say something!', 'rows'=>'4', 'id'=>'bodyInput', 'oninput' => 'checkCommentForm()']) !!}
                         {!! $errors->first('body', '<small class="help-block text-danger">:message</small>') !!}
                     </div>
                     <div class="text-center">
@@ -102,7 +102,7 @@
                             <span id="labelAddDrawing">Add a drawing</span>&nbsp<i class="fas fa-pencil" id="iconAddDrawing"></i>
                             <input type="hidden" id="addDrawing" value="false">
                         </a>
-                        {!! Form::submit('Comment', ['class' => 'btn btn-info pull-right', 'id' => 'commentBtn', 'disabled' => 'true']) !!}
+                        {!! Form::submit('Comment', ['class' => 'btn btn-info pull-right', 'id' => 'commentBtn']) !!}
                     </div>
                     <div class="container mx-auto collapse" id="drawingBox">
                         <br>
@@ -128,8 +128,8 @@
                             </div>
                         </div>
                         <div class="" id="canvas"></div>
-                        <div class="mx-auto">
-                            <button id="saveBtn" onclick="saveDrawing()" type="button" class="btn btn-success"><i class="fas fa-check"></i></button>
+                        <div class="mx-auto text-center">
+                            <!--<button id="saveBtn" onclick="saveDrawing()" type="button" class="btn btn-success"><i class="fas fa-check"></i></button>-->
                         </div>
                     </div>
                     {!! Form::close() !!}

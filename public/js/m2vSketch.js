@@ -7,10 +7,14 @@ let inputActive = false;
 function setup() {
     buffers[0] = createGraphics(sizeX, sizeY);
     buffers[1] = createGraphics(sizeX, sizeY);
+    buffers[0].pixelDensity(1);
+    buffers[1].pixelDensity(1);
     activeBuffer = 0;
     canvas = createCanvas(sizeX, sizeY);
     canvas.parent('canvas');
-    background(255, 255, 255);
+    canvas.id("drawingContext");
+    buffers[0].background(255, 255, 255);
+    buffers[1].background(255, 255, 255);
     pencil(2);
 }
 
@@ -81,4 +85,18 @@ function saveBuffer() {
     }else{
         buffers[1].copy(buffers[0], 0, 0, sizeX, sizeY, 0, 0, sizeX, sizeY);
     }
+}
+
+function isCanvasEmpty(){
+    buffers[activeBuffer].loadPixels();
+    let empty = true;
+    let d = buffers[activeBuffer].pixelDensity();
+    let size = 4 * (sizeX * d) * (sizeY / d);
+    for (let i = 0; empty && i < size; i += 4) {
+        //console.log("("+pixels[i] + "," + pixels[i+1] + "," +pixels[i+2]+")");
+        if(buffers[activeBuffer].pixels[i] < 255 || buffers[activeBuffer].pixels[i+1] < 255 || buffers[activeBuffer].pixels[i+2] < 255){
+            empty = false;
+        }
+    }
+    return empty;
 }
