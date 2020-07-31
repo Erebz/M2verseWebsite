@@ -11,12 +11,8 @@ trait CommentPost
 {
     public function comment($fields, Publication $publication, Utilisateur $author)
     {
-        if($fields->image){
+        if($fields->image && $fields->image != ''){
             $data = base64_decode($fields->image);
-            //dd($data);
-            //dd(Storage::get('/drawings/file.txt'));
-            //$filename = Storage::putFile(public_path('storage'), $data);
-            //$filename = File::put('storage', $data);
             $filename = uniqid("drawing_") . ".png";
             File::put('storage/'.$filename, $data);
         }

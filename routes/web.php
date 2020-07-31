@@ -53,7 +53,7 @@ Route::middleware('auth')->group(function () {
     //->Delete
     Route::delete('/publications/{publication}/delete', 'PublicationController@destroy')->name('publication.delete');
     Route::delete('/comments/{comment}/delete', 'MessageController@destroy')->name('comment.delete');
-    
+
 
     Route::post('/logout', 'LoginController@logout')->name('logout');
 });

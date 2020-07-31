@@ -11,7 +11,7 @@ trait PublishPost
 {
     public function publish($fields, Communaute $community, Utilisateur $author)
     {
-        if($fields->image){
+        if($fields->image && $fields->image != ''){
             $data = base64_decode($fields->image);
             $filename = uniqid("drawing_") . ".png";
             File::put('storage/'.$filename, $data);

@@ -143,7 +143,8 @@ function checkForm(){
             if(submitOk){
                 let choice = confirm("The drawing is empty. It won't be sent. Continue?");
                 if(choice){
-                    imageOK = true;
+                    imageOK = false;
+                    submitOk = true;
                 }else{
                     submitOk = false;
                 }
@@ -154,11 +155,13 @@ function checkForm(){
         }
     }
     if(submitOk){
+        let imgData = document.getElementById('imageDataURL');
         if(imageOK) {
             let drawing = document.getElementsByClassName('p5Canvas')[0];
             let dataURL = drawing.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, "");
-            let imgData = document.getElementById('imageDataURL');
             imgData.value = dataURL;
+        }else{
+            imgData.value = '';
         }
         return true;
     }else{

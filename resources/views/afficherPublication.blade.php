@@ -8,7 +8,10 @@
 @endsection
 
 @section('titreItem')
-    <h1 class="text-center">{{$community->nom}}</h1><br/>
+    <h1 class="text-center">{{$community->nom}}</h1>
+    <div class="mx-auto text-center">
+        <a class="btn btn-outline-info text-center" href="{{route('communautes.show', $community->id)}}">Back</a>
+    </div><br/>
 @endsection
 
 @section('contenu')
@@ -26,10 +29,17 @@
         </div>
 
         <div class="card-body">
-            @if($title)
-                <h5 class="card-title">{{$title ?? ''}}</h5>
+            @if($publication->titre)
+                <h5 class="card-title">{{$publication->titre ?? ''}}</h5>
             @endif
-            <p class="card-text">{{$body}}</p>
+            @if($publication->texte)
+                <p class="card-text">{{$publication->texte}}</p>
+            @endif
+            @if($publication->image != null)
+                <div class="boxPost mx-auto">
+                    <img class="imagePost" src={{url('storage/'.$publication->image)}}>
+                </div>
+            @endif
             <p><small class="card-text font-italic">Posted on {{$date}}</small></p>
             @if(!$publication->likedByUser())
                 <button id="yeahButtonPub{{$publication->id}}" class="btn btn-outline-success" onclick="likePublication({{$publication->id}})">

@@ -15,6 +15,9 @@
     <div class="w-25 mx-auto">
         <p class="text-center font-italic">{{$description}}</p>
     </div>
+    <div class="mx-auto text-center">
+        <a class="btn btn-outline-info text-center" href="{{route('communautes.index')}}">Back</a>
+    </div><br/>
     @if (Session::get('alert'))
         <div class="alert alert-{!! Session::get('alert') !!} mx-auto w-50">
             {!! Session::get(Session::get('alert')) !!}
