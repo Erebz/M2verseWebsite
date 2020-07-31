@@ -12,9 +12,10 @@ trait CommentPost
     {
         if($fields->image){
             $data = base64_decode($fields->image);
-            //dd(Storage::get('public/drawings/file.txt'));
-            //$filename = Storage::put('drawings', $data);
-            //dd($filename);
+            //dd($data);
+            //dd(Storage::get('/drawings/file.txt'));
+            $filename = Storage::put('drawings', $data);
+            dd($filename);
         }
         return \App\Modeles\Message::create([
             'date_message' => now(),

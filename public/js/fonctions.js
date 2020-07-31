@@ -173,7 +173,7 @@ function checkForm(){
             let imgData = document.getElementById('imageDataURL');
             imgData.value = dataURL;
         }
-        return false;
+        return true;
     }else{
         return false;
     }
