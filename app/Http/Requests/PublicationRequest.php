@@ -28,7 +28,6 @@ class PublicationRequest extends FormRequest
             'title'     => ['max:50'],
             'body'  => ['max:300'],
             'image' => [''],
-            'hasImage' => [''],
         ];
     }
 }

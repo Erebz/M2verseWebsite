@@ -34,7 +34,6 @@ class MessageController extends Controller
     }
 
     public function store(CommentRequest $request, Publication $publication){
-        //dd($request->image);
         $this->comment($request, $publication, Session::get('user'));
         return back()->send();
     }

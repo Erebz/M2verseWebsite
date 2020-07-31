@@ -139,33 +139,20 @@ function checkForm(){
     }
 
     if(addDrawing != null && addDrawing.value === "true"){
-        //console.log("Ajout d'un dessin !");
         if(isCanvasEmpty()){
-            //console.log("Le dessin est vide.");
             if(submitOk){
                 let choice = confirm("The drawing is empty. It won't be sent. Continue?");
                 if(choice){
-                    //console.log("Envoi d'un post sans image.");
-                    //console.log("[SUBMIT]");
                     imageOK = true;
                 }else{
-                    //console.log("Pas de submit.");
                     submitOk = false;
                 }
             }
         }else{
-            //console.log("Le dessin n'est pas vide.");
             submitOk = true;
             imageOK = true;
         }
     }
-
-    //if(submitOk){
-    //    console.log("Le post peut être envoyé.");
-    //}else{
-    //    console.log("Le post ne peut pas être envoyé.");
-    //}
-
     if(submitOk){
         if(imageOK) {
             let drawing = document.getElementsByClassName('p5Canvas')[0];
@@ -179,15 +166,15 @@ function checkForm(){
     }
 }
 
-function sendImagePost(dataURL, urlPOST){
-    fetch(urlPOST, {
-        method: 'post',
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(json)
-    }).then(function(res){ console.log(res) })
-        .catch(function(res){ console.log(res) });
-}
+//function sendImagePost(dataURL, urlPOST){
+//    fetch(urlPOST, {
+//        method: 'post',
+//        headers: {
+//            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+//            'Accept': 'application/json, text/plain, */*',
+//            'Content-Type': 'application/json'
+//        },
+//        body: JSON.stringify(json)
+//    }).then(function(res){ console.log(res) })
+//        .catch(function(res){ console.log(res) });
+//}

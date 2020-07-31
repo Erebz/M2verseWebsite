@@ -1,7 +1,7 @@
 @extends('template')
 
 <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
-{!! Html::script('js/m2vSketch.js') !!}
+{!! Html::script('js/m2vSketch2.js') !!}
 
 @section('titrePage')
     M2V - {{$nom}}
@@ -28,18 +28,20 @@
                 </a>
             </div>
             <div class="card-body collapse" id="publishForm">
-                {!! Form::open(['route' => ['communaute.publish', $communaute->id], 'method' => 'post']) !!}
+                {!! Form::open(['route' => ['communaute.publish', $communaute->id], 'method' => 'post', 'onsubmit' => 'return checkForm();']) !!}
                 <div class="form-group {!! $errors->has('title') ? 'has-error' : '' !!}">
-                    {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Title']) !!}
+                    {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Title', 'id'=>'titleInput']) !!}
                     {!! $errors->first('title', '<small class="help-block text-danger">:message</small>') !!}
                 </div>
                 <div class="form-group {!! $errors->has('body') ? 'has-error' : '' !!}">
-                    {!! Form::textarea('body', null, ['class' => 'form-control', 'placeholder' => 'Share something!', 'rows'=>'4']) !!}
+                    {!! Form::textarea('body', null, ['class' => 'form-control', 'placeholder' => 'Share something!', 'rows'=>'4', 'id'=>'bodyInput']) !!}
                     {!! $errors->first('body', '<small class="help-block text-danger">:message</small>') !!}
                 </div>
                 <div class="text-center">
-                    <a class="btn btn-outline-info" data-toggle="collapse" href="#drawingBox" role="button" aria-expanded="false" aria-controls="drawingBox">
-                        Add a drawing&nbsp<i class="fas fa-pencil"></i>
+                    <a onclick="addDrawing()" id="btnAddDrawing" class="btn btn-outline-info" data-toggle="collapse" href="#drawingBox" role="button" aria-expanded="false" aria-controls="drawingBox">
+                        <span id="labelAddDrawing">Add a drawing</span>&nbsp<i class="fas fa-pencil" id="iconAddDrawing"></i>
+                        <input type="hidden" name="hasImage" id="addDrawing" value="false">
+                        <input type="hidden" name="image" id="imageDataURL" value="null">
                     </a>
                     {!! Form::submit('Publish', ['class' => 'btn btn-info pull-right', 'id' => 'publishBtn']) !!}
                 </div>
@@ -51,6 +53,7 @@
                         </div>
                         <div class="btn-group mr-4" role="group" aria-label="undo">
                             <button id="btnUndo" onclick="undo()" type="button" class="btn btn-outline-info"><i class="fas fa-undo-alt"></i></button>
+                            <button id="btnRedo" onclick="redo()" type="button" class="btn btn-outline-info"><i class="fas fa-redo-alt"></i></button>
                         </div>
                         <div class="btn-group mr-2" role="group" aria-label="pencils">
                             <button id="btnPencil1" onclick="pencil(1)" type="button" class="btn btn-outline-secondary"><i class="fas fa-pencil-alt fa-sm"></i></button>
@@ -67,6 +70,9 @@
                         </div>
                     </div>
                     <div class="" id="canvas"></div>
+                    <!--<div class="mx-auto text-center">
+                        <button id="saveBtn" onclick="saveDrawing()" type="button" class="btn btn-success"><i class="fas fa-check"></i></button>
+                    </div>-->
                 </div>
                 {!! Form::close() !!}
             </div>
@@ -76,7 +82,8 @@
             {!! Form::open(array('route' => array('communaute.join', $communaute->id), 'method' => 'post', 'class'=>'inlineElement')) !!}
             {!! Form::submit('Join this community', ['class' => 'btn btn-success inlineElement']) !!}
             {!! Form::close() !!}
-        </div><br/>
+        </div>
+        <br/>
     @endif
     @foreach($publications as $publication)
         <div class="card mx-auto w-50">
@@ -94,7 +101,14 @@
                 @if($publication->titre)
                     <h5 class="card-title">{{$publication->titre ?? ''}}</h5>
                 @endif
-                <p class="card-text">{{$publication->texte}}</p>
+                @if($publication->texte)
+                    <p class="card-text">{{$publication->texte}}</p>
+                @endif
+                @if($publication->image != null)
+                    <div class="boxPost mx-auto">
+                        <img class="imagePost" src={{url('storage/'.$publication->image)}}>
+                    </div>
+                @endif
                 <p><small class="card-text font-italic">Par {{$publication->auteurPublication->pseudo}}, le {{$publication->date_publication}}</small></p>
                 @if(!$publication->likedByUser())
                     <button id="yeahButtonPub{{$publication->id}}" class="btn btn-outline-success" onclick="likePublication({{$publication->id}})">

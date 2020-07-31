@@ -64,7 +64,7 @@
                 <p class="card-text">{{$comment->texte}}</p>
                 @if($comment->image != null)
                     <div class="boxPost mx-auto">
-                        <img class="imagePost" src={{url('img/wide.jpg')}}>
+                        <img class="imagePost" src={{url('storage/'.$comment->image)}}>
                     </div>
                 @endif
                 <p><small class="card-text font-italic">Posted on {{$comment->date_message}}</small></p>
@@ -94,7 +94,7 @@
                 <div class="card-body collapse" id="commentForm">
                     {!! Form::open(['route' => ['publication.comment', $publication->id], 'method' => 'post', 'id'=>'commentForm', 'onsubmit' => 'return checkForm();']) !!}
                     <div class="form-group {!! $errors->has('body') ? 'has-error' : '' !!}">
-                        {!! Form::textarea('body', null, ['class' => 'form-control', 'placeholder' => 'Say something!', 'rows'=>'4', 'id'=>'bodyInput', 'oninput' => 'checkCommentForm()']) !!}
+                        {!! Form::textarea('body', null, ['class' => 'form-control', 'placeholder' => 'Say something!', 'rows'=>'4', 'id'=>'bodyInput']) !!}
                         {!! $errors->first('body', '<small class="help-block text-danger">:message</small>') !!}
                     </div>
                     <div class="text-center">
@@ -130,9 +130,9 @@
                             </div>
                         </div>
                         <div class="" id="canvas"></div>
-                        <div class="mx-auto text-center">
-                            <!--<button id="saveBtn" onclick="saveDrawing()" type="button" class="btn btn-success"><i class="fas fa-check"></i></button>-->
-                        </div>
+                        <!--<div class="mx-auto text-center">
+                            <button id="saveBtn" onclick="saveDrawing()" type="button" class="btn btn-success"><i class="fas fa-check"></i></button>
+                        </div>-->
                     </div>
                     {!! Form::close() !!}
                 </div>
