@@ -41,12 +41,10 @@
                     {!! $errors->first('body', '<small class="help-block text-danger">:message</small>') !!}
                 </div>
                 <div class="text-center">
-                    @component('components.addDrawing')
-                    @endcomponent
+                    @component('components.addDrawing')@endcomponent
                     {!! Form::submit('Publish', ['class' => 'btn btn-info pull-right', 'id' => 'publishBtn']) !!}
                 </div>
-                @component('components.drawingCanvas')
-                @endcomponent
+                @component('components.drawingCanvas')@endcomponent
                 {!! Form::close() !!}
             </div>
         </div><br/>

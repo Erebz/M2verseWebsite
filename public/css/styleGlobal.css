@@ -6,12 +6,12 @@
     display: inline;
 }
 
-.imagePost, .imageProfile{
+.imagePost, .imageProfile, .imageAuthor{
     max-width: 100%;
     max-height: 100%;
     display: block; /* remove extra space below image */
 }
-.boxPost{
+.boxPost, .boxAuthor{
     width: fit-content;
 }
 .boxPost.large{

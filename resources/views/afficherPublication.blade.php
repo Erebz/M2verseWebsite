@@ -27,7 +27,6 @@
             </div>
             </div>
         </div>
-
         <div class="card-body">
             @if($publication->titre)
                 <h5 class="card-title">{{$publication->titre ?? ''}}</h5>
@@ -66,8 +65,7 @@
                     </div>
                 @endif
                 <p><small class="card-text font-italic">Posted on {{$comment->date_message}}</small></p>
-                @component('components.yeahCommentBtn', ['comment' => $comment])
-                @endcomponent
+                @component('components.yeahCommentBtn', ['comment' => $comment])@endcomponent
             </div>
         </div><br/>
     @endforeach
@@ -85,12 +83,10 @@
                         {!! $errors->first('body', '<small class="help-block text-danger">:message</small>') !!}
                     </div>
                     <div class="text-center">
-                        @component('components.addDrawing')
-                        @endcomponent
+                        @component('components.addDrawing')@endcomponent
                         {!! Form::submit('Comment', ['class' => 'btn btn-info pull-right', 'id' => 'commentBtn']) !!}
                     </div>
-                    @component('components.drawingCanvas')
-                    @endcomponent
+                    @component('components.drawingCanvas')@endcomponent
                     {!! Form::close() !!}
                 </div>
             </div><br/>
