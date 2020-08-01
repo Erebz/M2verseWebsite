@@ -33,7 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::resource('utilisateurs', 'UtilisateurController');
+    Route::resource('utilisateurs', 'UtilisateurController')
+    ->only('index', 'show');
     Route::resource('communautes', 'CommunauteController');
 
     //Community features

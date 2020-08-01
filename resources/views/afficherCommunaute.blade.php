@@ -41,42 +41,12 @@
                     {!! $errors->first('body', '<small class="help-block text-danger">:message</small>') !!}
                 </div>
                 <div class="text-center">
-                    <a onclick="addDrawing()" id="btnAddDrawing" class="btn btn-outline-info" data-toggle="collapse" href="#drawingBox" role="button" aria-expanded="false" aria-controls="drawingBox">
-                        <span id="labelAddDrawing">Add a drawing</span>&nbsp<i class="fas fa-pencil" id="iconAddDrawing"></i>
-                        <input type="hidden" name="hasImage" id="addDrawing" value="false">
-                        <input type="hidden" name="image" id="imageDataURL" value="null">
-                    </a>
+                    @component('components.addDrawing')
+                    @endcomponent
                     {!! Form::submit('Publish', ['class' => 'btn btn-info pull-right', 'id' => 'publishBtn']) !!}
                 </div>
-                <div class="container mx-auto collapse" id="drawingBox">
-                    <br>
-                    <div class="btn-toolbar p-1 mx-auto" role="toolbar" aria-label="Toolbar with button groups" id="toolbox">
-                        <div class="btn-group mr-2" role="group" aria-label="reset">
-                            <button id="btnClear" onclick="clearCanvas()" type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                        <div class="btn-group mr-4" role="group" aria-label="undo">
-                            <button id="btnUndo" onclick="undo()" type="button" class="btn btn-outline-info"><i class="fas fa-undo-alt"></i></button>
-                            <button id="btnRedo" onclick="redo()" type="button" class="btn btn-outline-info"><i class="fas fa-redo-alt"></i></button>
-                        </div>
-                        <div class="btn-group mr-2" role="group" aria-label="pencils">
-                            <button id="btnPencil1" onclick="pencil(1)" type="button" class="btn btn-outline-secondary"><i class="fas fa-pencil-alt fa-sm"></i></button>
-                            <button id="btnPencil2" onclick="pencil(2)" type="button" class="btn btn-outline-secondary"><i class="fas fa-pencil-alt fa-md"></i></button>
-                            <button id="btnPencil3" onclick="pencil(3)" type="button" class="btn btn-outline-secondary"><i class="fas fa-pencil-alt fa-lg"></i></button>
-                        </div>
-                        <div class="btn-group mr-4" role="group" aria-label="erasers">
-                            <button id="btnEraser1" onclick="eraser(1)" type="button" class="btn btn-outline-secondary"><i class="fas fa-eraser fa-sm"></i></button>
-                            <button id="btnEraser2" onclick="eraser(2)" type="button" class="btn btn-outline-secondary"><i class="fas fa-eraser fa-md"></i></button>
-                            <button id="btnEraser3" onclick="eraser(3)" type="button" class="btn btn-outline-secondary"><i class="fas fa-eraser fa-lg"></i></button>
-                        </div>
-                        <div class="btn-group" role="group" aria-label="color">
-                            <button type="button" class="btn btn-outline-success"><i class="fas fa-palette"></i></button>
-                        </div>
-                    </div>
-                    <div class="" id="canvas"></div>
-                    <!--<div class="mx-auto text-center">
-                        <button id="saveBtn" onclick="saveDrawing()" type="button" class="btn btn-success"><i class="fas fa-check"></i></button>
-                    </div>-->
-                </div>
+                @component('components.drawingCanvas')
+                @endcomponent
                 {!! Form::close() !!}
             </div>
         </div><br/>
@@ -113,19 +83,7 @@
                     </div>
                 @endif
                 <p><small class="card-text font-italic">Par {{$publication->auteurPublication->pseudo}}, le {{$publication->date_publication}}</small></p>
-                @if(!$publication->likedByUser())
-                    <button id="yeahButtonPub{{$publication->id}}" class="btn btn-outline-success" onclick="likePublication({{$publication->id}})">
-                        <span id="yeahLabelPub{{$publication->id}}">Yeah</span>&nbsp<i class="far fa-thumbs-up" id="yeahIconPub{{$publication->id}}"></i>
-                        (<span id="yeahCountPub{{$publication->id}}">{{sizeof($publication->likes)}}</span>)
-                        <input id="routeLikePub{{$publication->id}}" type="hidden" value="{{route('publication.like', $publication->id)}}">
-                    </button>
-                @else
-                    <button id="yeahButtonPub{{$publication->id}}" class="btn btn-success" onclick="dislikePublication({{$publication->id}})">
-                        <span id="yeahLabelPub{{$publication->id}}">Yeah!</span>&nbsp<i class="fas fa-thumbs-up" id="yeahIconPub{{$publication->id}}"></i>
-                        (<span id="yeahCountPub{{$publication->id}}">{{sizeof($publication->likes)}}</span>)
-                        <input id="routeLikePub{{$publication->id}}" type="hidden" value="{{route('publication.like', $publication->id)}}">
-                    </button>
-                @endif
+                    @component('components.yeahPostBtn', ['publication' => $publication])@endcomponent
                 <a href="{{route('publication.show', $publication)}}" class="btn btn-secondary">Commenter ({{sizeof($publication->reponsesPublication)}})</a>
             </div>
         </div><br/>
